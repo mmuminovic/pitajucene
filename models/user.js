@@ -30,6 +30,9 @@ const User = sequelize.define('wp9p_user', {
     display_name: {
         type: Sequelize.STRING
     }
-})
+}, {
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+  })
 
 module.exports = User;

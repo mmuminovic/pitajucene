@@ -10,11 +10,12 @@ const Question = sequelize.define('wp9p_post', {
         primaryKey: true
     },
     post_title: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        type: Sequelize.STRING,
+        allowNull: false,
+        args: /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g
     },
     post_content: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: false
     },
     post_author: {
@@ -39,6 +40,9 @@ const Question = sequelize.define('wp9p_post', {
         type: Sequelize.STRING
     }
     
-})
+}, {
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+  })
 
 module.exports = Question;

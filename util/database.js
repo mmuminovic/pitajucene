@@ -5,7 +5,8 @@ const sequelize = new Sequelize('pitajucene', 'nativeuser', 'manutd95', {
     host: 'localhost',
     define: {
         timestamps: false
-    }
+    },
+    logging: false
 });
 
 module.exports = sequelize;
