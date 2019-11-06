@@ -6,7 +6,7 @@ const questionController = require('../controllers/questions');
 
 router.get('/', questionController.getQuestions);
 
-router.get('/get-question/:userId', questionController.getQuestion);
+router.get('/get-question/:questionId', questionController.getQuestion);
 
 router.post('/add-question');
 
