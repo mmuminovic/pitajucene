@@ -1,4 +1,5 @@
 ﻿const Question = require('../models/question');
+const mongoose = require('mongoose');
 
 exports.getQuestions = (req, res, next) => {
     Question
@@ -24,12 +25,22 @@ exports.getQuestion = (req, res, next) => {
 }
 
 exports.addQuestion = (req, res, next) => {
+    const newQuestion = new Question ({
+        _id: new mongoose.Types.ObjectId(),
+        title: req.body.title,
+        question: req.body.question,
+        answer: req.body.answer,
+        addedBy: req.body.addedBy
+    });
+    newQuestion.save().then(result => {
+        console.log(result);
+    }).catch(err => console.log(err));
 }
 
-exports.deleteQuestion = (req, res, next) => {
+// exports.deleteQuestion = (req, res, next) => {
 
-}
+// }
 
-exports.editQuestion = (req, res, next) => {
+// exports.editQuestion = (req, res, next) => {
 
-}
+// }
