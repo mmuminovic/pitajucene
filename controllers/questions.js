@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 exports.getQuestions = (req, res, next) => {
     Question
         .find()
-        .then(question => {
-            res.status(200).json(question);
+        .then(questions => {
+            res.status(200).json(questions);
         })
         .catch(err => {
             res.status(500).json({ error: err });
@@ -33,7 +33,7 @@ exports.addQuestion = (req, res, next) => {
         addedBy: req.body.addedBy
     });
     newQuestion.save().then(result => {
-        console.log(result);
+        res.status(200).json(result);
     }).catch(err => console.log(err));
 }
 
