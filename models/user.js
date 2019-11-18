@@ -4,10 +4,25 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    email: String,
-    password: String,
-    fullName: String,
+    fullName: {
+        type: String,
+        required: true
+    },
+    dateOfBirth: Date,
+    city: String,
+    country: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     admin: Boolean,
+    moderator: Boolean,
     daija: Boolean
 })
 

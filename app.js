@@ -7,6 +7,8 @@ const cors = require('cors');
 
 const questionRoutes = require('./routes/questions');
 const errorController = require('./controllers/error');
+const categoryRoutes = require('./routes/categories');
+const messageRoutes = require('./routes/messages');
 
 const MONGODB_URI = `mongodb://127.0.0.1:27017/pitajucene`;
 
@@ -21,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(questionRoutes);
+app.use('/category', categoryRoutes);
 app.use(errorController.get404);
 
 mognoose
