@@ -9,11 +9,11 @@ router.get('/', questionController.getQuestions);
 
 router.get('/get-question/:questionId', questionController.getQuestion);
 
-router.post('/add-question', questionController.addQuestion);
+router.post('/send-question', questionController.sendQuestion);
 
-// router.delete('/delete-question/:questionId');
+router.delete('/get-question/:questionId', questionController.deleteQuestion);
 
-// router.patch('/edit-question');
+router.patch('/edit-question/:questionId', questionController.editQuestion);
 
 
 

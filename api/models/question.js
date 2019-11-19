@@ -19,8 +19,7 @@ const QuestionSchema = new Schema({
     }],
     onRemaining: Boolean,
     accepted: Boolean,
-    public: Boolean,
-    alreadyExists: Boolean
+    public: Boolean
 })
 
 module.exports = mongoose.model('Question', QuestionSchema);
