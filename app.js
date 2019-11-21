@@ -9,7 +9,7 @@ require('dotenv').config();
 const questionRoutes = require('./api/routes/questions');
 const errorController = require('./api/controllers/error');
 const categoryRoutes = require('./api/routes/categories');
-const messageRoutes = require('./api/routes/messages');
+const userRoutes = require('./api/routes/user');
 
 const MONGODB_URI = `${process.env.MONGODB_URI}`;
 
@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 app.use(questionRoutes);
 app.use('/category', categoryRoutes);
+app.use(userRoutes);
 app.use(errorController.get404);
 
 mognoose

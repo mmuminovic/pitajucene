@@ -8,20 +8,25 @@ const MessageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    toAdmin: Boolean,
     to: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: false
     },
-    messageTitle: {
-        type: String,
-        required: true
-    },
-    messageContent: {
-        type: String,
-        required: true
-    }
+    messages: [{
+        title: {
+            type: String,
+            required: true
+        },
+        message: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 })
 
 module.exports = mongoose.model('Message', MessageSchema);
