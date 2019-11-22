@@ -2,7 +2,8 @@ const Message = require('../models/message');
 const mongoose = require('mongoose');
 
 exports.getMessages = (req, res, next) => {
-    Message.find()
+    const user = req.user;
+    Message.find({ to: user._id })
         .then(messages => {
             res.status(200).json(messages);
         })
@@ -28,15 +29,28 @@ exports.sendMessage = (req, res, next) => {
         messageTitle: req.body.messageTitle,
         messageContent: req.body.messageContent,
         to: req.body.to,
-        from: req.body.from
+        from: req.user._id
     });
     sentMessage.save()
-    .then(result => {
-        res.status(201).json({
-            message: `Poruka je uspešno poslata.`
+        .then(result => {
+            res.status(201).json({
+                message: `Poruka je uspešno poslata.`
+            })
         })
-    })
-    .catch(err => {
-        res.status(500).json(err);
-    })
+        .catch(err => {
+            res.status(500).json(err);
+        })
 }
+
+exports.arrivedMessages = (req, res, next) => {
+    Message.find({ to: null })
+        .then(messages => {
+            res.status(200).json(messages);
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        })
+}
+
+
+

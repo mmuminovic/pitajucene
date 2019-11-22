@@ -11,7 +11,8 @@ const MessageSchema = new Schema({
     to: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+        required: false,
+        default: null
     },
     messages: [{
         title: {
@@ -26,7 +27,15 @@ const MessageSchema = new Schema({
             type: Date,
             default: Date.now
         }
-    }]
+    }],
+    replied: {
+        type: Boolean,
+        default: false
+    },
+    seen: {
+        type: Boolean,
+        default: false
+    }
 })
 
 module.exports = mongoose.model('Message', MessageSchema);
