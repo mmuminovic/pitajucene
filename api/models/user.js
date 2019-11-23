@@ -21,6 +21,18 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    messages: [{
+        message: {
+            type: Schema.Types.ObjectId,
+            ref: 'Message'
+        },
+    }],
+    favouriteQuestions: [{
+        question: {
+            type: Schema.Types.ObjectId,
+            ref: 'Question'
+        }
+    }],
     admin: Boolean,
     moderator: Boolean,
     daija: Boolean

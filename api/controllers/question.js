@@ -27,8 +27,8 @@ exports.getQuestion = (req, res, next) => {
 exports.sendQuestion = (req, res, next) => {
     const newQuestion = new Question({
         _id: new mongoose.Types.ObjectId(),
-        questionTitle: req.body.questionTitle,
-        questionContent: req.body.questionContent,
+        title: req.body.title,
+        question: req.body.question,
         tags: req.body.tags,
         onRemaining: true,
         accepted: false,

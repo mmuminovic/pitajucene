@@ -4,8 +4,14 @@ const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    questionTitle: String,
-    questionContent: String,
+    title: {
+        type: String,
+        required: false
+    },
+    question: {
+        type: String,
+        required: true
+    },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category',
