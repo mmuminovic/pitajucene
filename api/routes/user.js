@@ -8,7 +8,7 @@ const isAuth = require('../middlewares/isAuth');
 
 router.get('/users', userController.getUsers)
 router.post('/signup', userController.createUser);
-router.get('/messages/', isAuth, userController.getMessages);
+router.get('/messages/', userController.getMessages);
 router.get('/messages/:messageId', userController.getMessage);
 router.delete('/messages/:messageId', userController.deleteMessage);
 router.post('/messages/send', userController.sendMessage);

@@ -36,8 +36,7 @@ exports.getUsers = (req, res, next) => {
 }
 
 exports.getMessages = (req, res, next) => {
-    const user = req.user;
-    Message.find({ to: user._id })
+    Message.find()
         // .sort({ messages.date: 'asc', test: -1 });
         .then(messages => {
             res.status(200).json(messages);

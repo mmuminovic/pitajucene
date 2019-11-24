@@ -12,6 +12,17 @@ exports.getQuestions = (req, res, next) => {
         })
 }
 
+exports.getQuestionsOnRemaining = (req, res, next) => {
+    Question
+        .find()
+        .then(questions => {
+            res.status(200).json(questions);
+        })
+        .catch(err => {
+            res.status(500).json({ error: err });
+        })
+}
+
 exports.getQuestion = (req, res, next) => {
     const id = req.params.questionId;
     Question

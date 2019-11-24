@@ -15,7 +15,7 @@ router.post('/send-question', isAuth, questionController.sendQuestion);
 
 router.delete('/get-question/:questionId', isAdmin, questionController.deleteQuestion);
 
-router.patch('/edit-question/:questionId', isAdmin, questionController.editQuestion);
+router.patch('/edit-question/:questionId', questionController.editQuestion);
 
 
 
