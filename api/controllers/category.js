@@ -27,7 +27,7 @@ exports.getCategory = (req, res, next) => {
 
 exports.addCategory = (req, res, next) => {
     const newCategory = new Category({
-        _id: mongoose.Types.ObjectId,
+        _id: new mongoose.Types.ObjectId(),
         categoryName: req.body.categoryName
     });
     newCategory.save()

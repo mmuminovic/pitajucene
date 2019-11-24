@@ -21,21 +21,28 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    messages: [{
-        message: {
-            type: Schema.Types.ObjectId,
-            ref: 'Message'
-        },
-    }],
+    messages: [
+        {
+            message: {
+                type: Schema.Types.ObjectId,
+                ref: 'Message',
+                default: null
+            }
+        }
+    ],
     favouriteQuestions: [{
         question: {
             type: Schema.Types.ObjectId,
-            ref: 'Question'
+            ref: 'Question',
+            default: null
         }
     }],
     admin: Boolean,
-    moderator: Boolean,
-    daija: Boolean
-})
+    moderator: Boolean
+});
+
+// UserSchema.methods.newMessage = () => {
+
+// }
 
 module.exports = mongoose.model('User', UserSchema);

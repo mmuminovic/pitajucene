@@ -4,21 +4,16 @@ const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    from: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    to: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false,
-        default: null
+        required: false
+    },
+    title: {
+        type: String,
+        required: true
     },
     messages: [{
-        title: {
-            type: String,
-            required: true
-        },
         message: {
             type: String,
             required: true
@@ -26,8 +21,17 @@ const MessageSchema = new Schema({
         date: {
             type: Date,
             default: Date.now
-        }
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: false
+        },
     }],
+    dateModified: {
+        type: Date,
+        default: Date.now
+    },
     replied: {
         type: Boolean,
         default: false

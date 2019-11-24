@@ -13,7 +13,7 @@ router.get('/get-question/:questionId', questionController.getQuestion);
 
 router.post('/send-question', isAuth, questionController.sendQuestion);
 
-router.delete('/:questionId', isAdmin, questionController.deleteQuestion);
+router.delete('/get-question/:questionId', isAdmin, questionController.deleteQuestion);
 
 router.patch('/edit-question/:questionId', isAdmin, questionController.editQuestion);
 

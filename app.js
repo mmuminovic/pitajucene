@@ -29,7 +29,7 @@ app.use(userRoutes);
 app.use(errorController.get404);
 
 mognoose
-    .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(result => {
         app.listen(8000);
         console.log(`App is started and listening on port 8000`);
