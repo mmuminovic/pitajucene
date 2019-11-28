@@ -7,7 +7,6 @@ const isAdmin = require('../middlewares/isAdmin');
 const isAuth = require('../middlewares/isAuth');
 
 router.get('/users', userController.getUsers)
-router.post('/signup', userController.createUser);
 router.get('/messages/', userController.getMessages);
 router.get('/messages/:messageId', userController.getMessage);
 router.delete('/messages/:messageId', userController.deleteMessage);

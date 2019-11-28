@@ -2,29 +2,6 @@ const User = require('../models/user');
 const Message = require('../models/message');
 const mongoose = require('mongoose');
 
-exports.createUser = (req, res, next) => {
-    const user = new User({
-        _id: new mongoose.Types.ObjectId(),
-        fullName: req.body.fullName,
-        email: req.body.email,
-        password: req.body.password,
-        admin: req.body.admin,
-        moderator: req.body.moderator,
-        daija: req.body.daija
-    });
-    user.save()
-        .then(result => {
-            res.status(201).json({
-                message: "Uspešno ste se registrovali."
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-
 exports.getUsers = (req, res, next) => {
     User.find()
         .then(users => {
