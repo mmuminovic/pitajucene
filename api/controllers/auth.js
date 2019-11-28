@@ -44,23 +44,26 @@ exports.login = (req, res, next) => {
 };
 
 exports.signup = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        error.statusCode = 422;
-        error.data = errors.array();
-        throw error;
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     const error = new Error('Validation failed.');
+    //     error.statusCode = 422;
+    //     error.data = errors.array();
+    //     throw error;
+    // }
     const email = req.body.email;
     const fullName = req.body.fullName;
     const password = req.body.password;
+    const dateOfBirth = req.body.dateOfBirth;
     bcrypt
         .hash(password, 12)
         .then(hashedPw => {
             const user = new User({
+                _id: mongoose.Types.ObjectId(),
                 email: email,
                 password: hashedPw,
-                fullName: fullName
+                fullName: fullName,
+                dateOfBirth: dateOfBirth
             });
             return user.save();
         })

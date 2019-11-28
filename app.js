@@ -10,6 +10,7 @@ const questionRoutes = require('./api/routes/questions');
 const errorController = require('./api/controllers/error');
 const categoryRoutes = require('./api/routes/categories');
 const userRoutes = require('./api/routes/user');
+const authRoutes = require('./api/routes/auth');
 
 const MONGODB_URI = `${process.env.MONGODB_URI}`;
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(questionRoutes);
+app.use(authRoutes);
 app.use('/category', categoryRoutes);
 app.use(userRoutes);
 app.use(errorController.get404);
