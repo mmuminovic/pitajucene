@@ -29,6 +29,9 @@ exports.login = (req, res, next) => {
                 userId: loadedUser._id.toString()
             }, 'somemsupersecretsecret', { expiresIn: '1h' }
             );
+            res.cookie('access_token', token, {
+                httpOnly: true
+              });
             res.status(200).json({
                 token: token,
                 userId: loadedUser._id.toString()
