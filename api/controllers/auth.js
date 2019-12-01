@@ -37,7 +37,8 @@ exports.login = (req, res, next) => {
                         token: token,
                         isAuth: true,
                         isAdmin: loadedUser.admin,
-                        isModerator: loadedUser.moderator
+                        isModerator: loadedUser.moderator,
+                        userId: loadedUser._id.toString()
                     });
                 }
             });
