@@ -11,7 +11,7 @@ router.get('/messages/', userController.getMessages);
 router.get('/messages/:messageId', userController.getMessage);
 router.delete('/messages/:messageId', userController.deleteMessage);
 router.post('/messages/send', userController.sendMessage);
-router.get('/admin/messages', userController.adminMessages)
+router.get('/admin/messages', isAuth, userController.adminMessages)
 router.patch('/messages/:messageId', userController.replyMessage);
 
 

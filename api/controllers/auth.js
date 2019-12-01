@@ -11,32 +11,36 @@ exports.login = (req, res, next) => {
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
-                const error = new Error('A user with this email could not be found.');
-                error.statusCode = 401;
-                throw error;
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
             }
             loadedUser = user;
-            return bcrypt.compare(password, user.password);
-        })
-        .then(isEqual => {
-            if (!isEqual) {
-                const error = new Error('Wrong password!');
-                error.statusCode = 401;
-                throw error;
-            }
-            const token = jwt.sign({
-                email: loadedUser.email,
-                userId: loadedUser._id.toString()
-            }, 'somemsupersecretsecret', { expiresIn: '1h' }
-            );
-            res.cookie('access_token', token, {
-                httpOnly: true
-              });
-            res.status(200).json({
-                token: token,
-                userId: loadedUser._id.toString()
-            })
-
+            bcrypt.compare(password, user.password, (err, result) => {
+                if (err) {
+                    return res.status(401).json({
+                        message: 'Auth failed'
+                    });
+                }
+                if (result) {
+                    const token = jwt.sign({
+                        email: loadedUser.email,
+                        userId: loadedUser._id.toString()
+                    }, process.env.JWT_KEY, { expiresIn: '1h' }
+                    );
+                    console.log(loadedUser);
+                    res.cookie('access_token', token, {
+                        httpOnly: true
+                    });
+                    return res.status(200).json({
+                        message: 'Auth successful',
+                        token: token,
+                        isAuth: true,
+                        isAdmin: loadedUser.admin,
+                        isModerator: loadedUser.moderator
+                    });
+                }
+            });
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -66,7 +70,9 @@ exports.signup = (req, res, next) => {
                 email: email,
                 password: hashedPw,
                 fullName: fullName,
-                dateOfBirth: dateOfBirth
+                dateOfBirth: dateOfBirth,
+                admin: false,
+                moderator: false
             });
             return user.save();
         })

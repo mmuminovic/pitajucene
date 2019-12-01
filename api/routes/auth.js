@@ -10,14 +10,14 @@ router.post(
     .withMessage('Please, enter the valid email.')
     .normalizeEmail(),
     body('password')
-    .isLength({min: 5})
+    .isLength({min: 2})
     .withMessage('Password has more than 5 characters.')
     .isAlphanumeric()
     .trim(),
     authController.login
   );
   
-  router.put(
+  router.post(
     '/signup',
     [
       check('email')
