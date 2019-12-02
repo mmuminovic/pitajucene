@@ -25,19 +25,19 @@ exports.login = (req, res, next) => {
                 if (result) {
                     const token = jwt.sign({
                         email: loadedUser.email,
-                        userId: loadedUser._id.toString()
+                        userId: loadedUser._id.toString(),
+                        fullName: loadedUser.fullName,
+                        isAdmin: loadedUser.admin,
+                        isModerator: loadedUser.moderator
                     }, process.env.JWT_KEY, { expiresIn: '1h' }
                     );
-                    console.log(loadedUser);
-                    res.cookie('access_token', token, {
-                        httpOnly: true
-                    });
+                    // console.log(loadedUser);
+                    // res.cookie('access_token', token, {
+                    //     httpOnly: true
+                    // });
                     return res.status(200).json({
                         message: 'Auth successful',
                         token: token,
-                        isAuth: true,
-                        isAdmin: loadedUser.admin,
-                        isModerator: loadedUser.moderator,
                         userId: loadedUser._id.toString()
                     });
                 }

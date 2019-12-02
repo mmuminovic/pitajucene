@@ -11,6 +11,16 @@ exports.getUsers = (req, res, next) => {
             res.status(500).json(err)
         })
 }
+exports.getUser = (req, res, next) => {
+    const id = req.params.user;
+    User.findById(id)
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+}
 
 exports.getMessages = (req, res, next) => {
     Message.find()

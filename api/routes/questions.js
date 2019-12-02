@@ -11,7 +11,7 @@ router.get('/', questionController.getQuestions);
 
 router.get('/get-question/:questionId', questionController.getQuestion);
 
-router.post('/send-question', isAuth, questionController.sendQuestion);
+router.post('/send-question', questionController.sendQuestion);
 
 router.delete('/get-question/:questionId', isAuth, questionController.deleteQuestion);
 
