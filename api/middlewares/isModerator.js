@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization;
         const decoded = jwt.verify(token, process.env.JWT_KEY);
-        if (decoded.isAdmin) {
+        if (decoded.isModerator) {
             req.userData = decoded;
             next();
         } else {

@@ -23,6 +23,12 @@ const QuestionSchema = new Schema({
         ref: 'Answer',
         required: false
     }],
+    takenBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: false
+    },
+    modifiedDate: Date,
     onRemaining: Boolean,
     accepted: Boolean,
     public: Boolean

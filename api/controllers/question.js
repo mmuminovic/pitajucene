@@ -12,9 +12,10 @@ exports.getQuestions = (req, res, next) => {
         })
 }
 
-exports.getQuestionsOnRemaining = (req, res, next) => {
+exports.getUsersQuestions = (req, res, next) => {
+    const userId = req.body.userId;
     Question
-        .find()
+        .find({ takenBy: userId })
         .then(questions => {
             res.status(200).json(questions);
         })
@@ -43,7 +44,8 @@ exports.sendQuestion = (req, res, next) => {
         tags: req.body.tags,
         onRemaining: true,
         accepted: false,
-        public: false
+        public: false,
+        modifiedDate: Date.now()
     });
     newQuestion.save()
         .then(result => {
@@ -67,7 +69,9 @@ exports.deleteQuestion = (req, res, next) => {
 
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
-    let updateOps = {};
+    let updateOps = {
+        modifiedDate: Date.now()
+    };
     const data = req.body;
     for (let ops in data) {
         updateOps[ops] = data[ops];
