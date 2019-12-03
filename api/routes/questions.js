@@ -9,7 +9,7 @@ const isAuth = require('../middlewares/isAuth');
 
 router.get('/', questionController.getQuestions);
 
-router.get('/user-questions/', questionController.getUsersQuestions);
+router.post('/user-questions/', questionController.getUsersQuestions);
 
 router.get('/get-question/:questionId', questionController.getQuestion);
 

@@ -19,9 +19,13 @@ const QuestionSchema = new Schema({
     },
     tags: [String],
     answers: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Answer',
-        required: false
+        answer: {
+            type: String
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
     takenBy: {
         type: Schema.Types.ObjectId,

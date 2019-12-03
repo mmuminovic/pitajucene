@@ -69,19 +69,16 @@ exports.deleteQuestion = (req, res, next) => {
 
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
-    let updateOps = {
-        modifiedDate: Date.now()
-    };
     const data = req.body;
-    for (let ops in data) {
-        updateOps[ops] = data[ops];
-    }
+    let updateOps = {
+        modifiedDate: Date.now(),
+        ...data
+    };
+    console.log(updateOps);
 
     Question.updateOne({ _id: questionId }, { $set: updateOps })
         .then(result => {
-            res.status(200).json({
-                message: `Recipe updated.`
-            });
+            res.status(200).json(result);
         })
         .catch(err => {
             res.status(500).json({
