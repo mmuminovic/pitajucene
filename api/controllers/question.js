@@ -70,13 +70,18 @@ exports.deleteQuestion = (req, res, next) => {
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
     const data = req.body;
-    let updateOps = {
+    let updateData = {
         modifiedDate: Date.now(),
         ...data
     };
-    console.log(updateOps);
 
-    Question.updateOne({ _id: questionId }, { $set: updateOps })
+    Question.update(
+        { _id: questionId },
+        {
+            $addToSet: { tags: updateData.tags, answers: updateData.answers },
+            $set: { modifiedDate: updateData.modifiedDate, title: updateData.title, category: updateData.category }
+        }
+    )
         .then(result => {
             res.status(200).json(result);
         })
