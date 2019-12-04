@@ -22,6 +22,7 @@
     "express-validator": "^6.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.8",
+    "mongoose-autopopulate": "^0.9.1",
     "mysql2": "^1.7.0",
     "sequelize": "^5.19.3",
     "utf8": "^3.0.0"

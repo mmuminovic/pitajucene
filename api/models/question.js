@@ -24,18 +24,22 @@ const QuestionSchema = new Schema({
         },
         user: {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            autopopulate: true
         }
     }],
     takenBy: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+        required: false,
+        autopopulate: true
     },
     modifiedDate: Date,
     onRemaining: Boolean,
     accepted: Boolean,
     public: Boolean
-})
+});
+
+QuestionSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('Question', QuestionSchema);

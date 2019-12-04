@@ -38,8 +38,9 @@ const UserSchema = new Schema({
         }
     }],
     admin: Boolean,
-    moderator: Boolean
+    moderator: Boolean,
 });
+
 
 // UserSchema.methods.newMessage = () => {
 

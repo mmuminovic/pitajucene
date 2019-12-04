@@ -1,5 +1,6 @@
 ﻿const Question = require('../models/question');
 const mongoose = require('mongoose');
+const UserModel = require('../models/user');
 
 exports.getQuestions = (req, res, next) => {
     Question
@@ -28,6 +29,7 @@ exports.getQuestion = (req, res, next) => {
     const id = req.params.questionId;
     Question
         .findById(id)
+        .exec()
         .then(question => {
             res.status(200).json(question);
         })
