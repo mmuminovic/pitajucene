@@ -25,7 +25,8 @@ const QuestionSchema = new Schema({
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            autopopulate: true
+            required: false,
+            autopopulate: true,
         }
     }],
     takenBy: {
@@ -37,6 +38,7 @@ const QuestionSchema = new Schema({
     modifiedDate: Date,
     onRemaining: Boolean,
     accepted: Boolean,
+    taken: Boolean,
     public: Boolean
 });
 

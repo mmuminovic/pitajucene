@@ -1,15 +1,25 @@
 ﻿const Question = require('../models/question');
 const mongoose = require('mongoose');
-const UserModel = require('../models/user');
 
 exports.getQuestions = (req, res, next) => {
     Question
         .find()
+        .populate({ path: 'takenBy', options: { autopopulate: false } })
+        .populate({
+            path: 'answers',
+            populate: {
+                path: 'user',
+                model: 'User'
+            },
+            options: {
+                autopopulate: false
+            }
+        })
         .then(questions => {
             res.status(200).json(questions);
         })
         .catch(err => {
-            res.status(500).json({ error: err });
+            res.status(500).json({ error: err.message });
         })
 }
 
@@ -17,6 +27,16 @@ exports.getUsersQuestions = (req, res, next) => {
     const userId = req.body.userId;
     Question
         .find({ takenBy: userId })
+        .populate({
+            path: 'answers',
+            populate: {
+                path: 'user',
+                model: 'User'
+            },
+            options: {
+                autopopulate: false
+            }
+        })
         .then(questions => {
             res.status(200).json(questions);
         })
@@ -72,17 +92,26 @@ exports.deleteQuestion = (req, res, next) => {
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
     const data = req.body;
-    let updateData = {
+    const updateData = {
         modifiedDate: Date.now(),
         ...data
     };
 
-    Question.update(
-        { _id: questionId },
+    Question.update({ _id: questionId },
         {
             $addToSet: { tags: updateData.tags, answers: updateData.answers },
-            $set: { modifiedDate: updateData.modifiedDate, title: updateData.title, category: updateData.category }
-        }
+            $set: {
+                modifiedDate: updateData.modifiedDate,
+                title: updateData.title,
+                category: updateData.category,
+                onRemaining: updateData.onRemaining,
+                accepted: updateData.accepted,
+                public: updateData.public,
+                takenBy: updateData.takenBy,
+                taken: updateData.taken
+            }
+        },
+        { upsert: true }
     )
         .then(result => {
             res.status(200).json(result);

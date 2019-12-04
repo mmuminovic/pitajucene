@@ -4,14 +4,16 @@ const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    answerText: String,
-    answerVideoLink: String,
-    answerAudio: String,
+    text: String,
     forQuestion: {
         type: Schema.Types.ObjectId,
         ref: 'Question'
     },
     answeredBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    forUser: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     }

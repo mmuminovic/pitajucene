@@ -37,8 +37,25 @@ const UserSchema = new Schema({
             default: null
         }
     }],
+    myQuestions: [{
+        question: {
+            type: Schema.Types.ObjectId,
+            ref: 'Question',
+            default: null
+        },
+        answer: {
+            type: String,
+            required: false
+        },
+        repliedBy: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            default: null,
+            required: false
+        }
+    }],
     admin: Boolean,
-    moderator: Boolean,
+    moderator: Boolean
 });
 
 
