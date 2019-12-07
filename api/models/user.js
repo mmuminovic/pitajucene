@@ -14,8 +14,7 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
-        required: true
+        unique: true
     },
     password: {
         type: String,
@@ -30,30 +29,6 @@ const UserSchema = new Schema({
             }
         }
     ],
-    favouriteQuestions: [{
-        question: {
-            type: Schema.Types.ObjectId,
-            ref: 'Question',
-            default: null
-        }
-    }],
-    myQuestions: [{
-        question: {
-            type: Schema.Types.ObjectId,
-            ref: 'Question',
-            default: null
-        },
-        answer: {
-            type: String,
-            required: false
-        },
-        repliedBy: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            default: null,
-            required: false
-        }
-    }],
     admin: Boolean,
     moderator: Boolean
 });

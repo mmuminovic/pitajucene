@@ -12,10 +12,6 @@ const AnswerSchema = new Schema({
     answeredBy: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
-    forUser: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     }
 })
 

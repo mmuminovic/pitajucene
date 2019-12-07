@@ -17,17 +17,9 @@ const QuestionSchema = new Schema({
         ref: 'Category',
         required: false
     },
-    tags: [String],
     answers: [{
-        answer: {
-            type: String
-        },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: false,
-            autopopulate: true,
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Answer'
     }],
     takenBy: {
         type: Schema.Types.ObjectId,
@@ -35,7 +27,6 @@ const QuestionSchema = new Schema({
         required: false,
         autopopulate: true
     },
-    modifiedDate: Date,
     onRemaining: Boolean,
     accepted: Boolean,
     taken: Boolean,

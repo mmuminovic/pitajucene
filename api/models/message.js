@@ -13,24 +13,14 @@ const MessageSchema = new Schema({
         type: String,
         required: true
     },
-    messages: [{
-        message: {
-            type: String,
-            required: true
-        },
-        date: {
-            type: Date,
-            default: Date.now
-        },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: false
-        },
-    }],
-    dateModified: {
-        type: Date,
-        default: Date.now
+    message: {
+        type: String,
+        required: true
+    },
+    repliedBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: false
     },
     replied: {
         type: Boolean,
