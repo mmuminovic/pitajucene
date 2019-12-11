@@ -63,7 +63,6 @@ exports.sendQuestion = (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title,
         question: req.body.question,
-        tags: req.body.tags,
         onRemaining: true,
         accepted: false,
         public: false,
@@ -89,6 +88,7 @@ exports.deleteQuestion = (req, res, next) => {
         })
 }
 
+// OVERWRITE THIS FUNCTION
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
     const data = req.body;
@@ -97,22 +97,7 @@ exports.editQuestion = (req, res, next) => {
         ...data
     };
 
-    Question.update({ _id: questionId },
-        {
-            $addToSet: { tags: updateData.tags, answers: updateData.answers },
-            $set: {
-                modifiedDate: updateData.modifiedDate,
-                title: updateData.title,
-                category: updateData.category,
-                onRemaining: updateData.onRemaining,
-                accepted: updateData.accepted,
-                public: updateData.public,
-                takenBy: updateData.takenBy,
-                taken: updateData.taken
-            }
-        },
-        { upsert: true }
-    )
+    Question.update({ _id: questionId })
         .then(result => {
             res.status(200).json(result);
         })
