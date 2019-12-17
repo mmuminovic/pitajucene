@@ -88,7 +88,6 @@ exports.deleteQuestion = (req, res, next) => {
         })
 }
 
-// OVERWRITE THIS FUNCTION
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
     const data = req.body;
@@ -97,8 +96,9 @@ exports.editQuestion = (req, res, next) => {
         ...data
     };
 
-    Question.update({ _id: questionId })
+    Question.findOneAndUpdate({ _id: questionId }, updateData)
         .then(result => {
+            console.log(result);
             res.status(200).json(result);
         })
         .catch(err => {

@@ -11,6 +11,7 @@ exports.getUsers = (req, res, next) => {
             res.status(500).json(err)
         })
 }
+
 exports.getUser = (req, res, next) => {
     const id = req.params.user;
     User.findById(id)
@@ -43,6 +44,7 @@ exports.getMessage = (req, res, next) => {
             res.status(500).json(err);
         })
 }
+
 exports.deleteMessage = (req, res, next) => {
     const id = req.params.messageId;
     Message.deleteOne({ _id: id })
