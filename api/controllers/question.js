@@ -4,17 +4,7 @@ const mongoose = require('mongoose');
 exports.getQuestions = (req, res, next) => {
     Question
         .find()
-        .populate({ path: 'takenBy', options: { autopopulate: false } })
-        .populate({
-            path: 'answers',
-            populate: {
-                path: 'user',
-                model: 'User'
-            },
-            options: {
-                autopopulate: false
-            }
-        })
+        .populate({ path: 'answers' })
         .then(questions => {
             res.status(200).json(questions);
         })
@@ -91,21 +81,27 @@ exports.deleteQuestion = (req, res, next) => {
 exports.editQuestion = (req, res, next) => {
     const questionId = req.params.questionId;
     const data = req.body;
-    const updateData = {
-        modifiedDate: Date.now(),
+    let updateData = {
         ...data
     };
-
-    Question.findOneAndUpdate({ _id: questionId }, updateData)
+    const answer = req.body.answers;
+    delete updateData.answers;
+    console.log(updateData);
+    Question.findOneAndUpdate(
+        { _id: questionId },
+        { $set: updateData, $push: { answers: answer }},
+        { new: true }
+        
+    )
         .then(result => {
             console.log(result);
             res.status(200).json(result);
         })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    })
 }
 
 

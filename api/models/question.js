@@ -31,8 +31,10 @@ const QuestionSchema = new Schema({
     accepted: Boolean,
     taken: Boolean,
     public: Boolean
-});
-
-QuestionSchema.plugin(require('mongoose-autopopulate'));
+},
+    {
+        timestamps: true
+    }
+);
 
 module.exports = mongoose.model('Question', QuestionSchema);
